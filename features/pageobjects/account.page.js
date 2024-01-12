@@ -18,7 +18,7 @@ class AccountPage extends Page {
     get email() {
         return $('#Email');
     }
-    
+
     open () {
         return super.open('account');
     }
