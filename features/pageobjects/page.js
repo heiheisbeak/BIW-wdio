@@ -6,7 +6,7 @@ export default class Page {
         return $("a", "Register");
     }
     get linkLogIn () {
-        return $("a", "Log in");
+        return $('a=Log in');
     }
     get linkWishList() {
         return $("span", "Wishlist");
@@ -15,7 +15,7 @@ export default class Page {
         return $("span", "Shopping cart");
     }
     get linkMyAccount() {
-        return $("a", "My account");
+        return $('a=My account')
     }
 
 

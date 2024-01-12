@@ -12,7 +12,9 @@ class LoginPage extends Page {
     }
 
     get btnLogin () {
-        return $('button[type="submit"]');
+        //return $('button[type="submit"]');
+        //return $$('button[type="submit"]')[1];
+        return $('button=Log in');
     }
 
     async login (username, password) {
