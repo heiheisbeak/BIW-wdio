@@ -1,7 +1,7 @@
 import { $ } from '@wdio/globals'
 import Page from './page.js';
 
-class Registration extends Page {
+class RegistrationPage extends Page {
     
     get heading() {
         return $("h1");
@@ -32,7 +32,7 @@ class Registration extends Page {
     }
 
     open () {
-        return super.open('registration');
+        return super.open('/');
     }
 }
 

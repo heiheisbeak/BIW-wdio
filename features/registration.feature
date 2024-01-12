@@ -1,3 +1,4 @@
+#@ignore
 Feature: Register a new user account
     As a new user, I can register an account so that I can make orders and view my account details
 

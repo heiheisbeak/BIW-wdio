@@ -10,7 +10,7 @@ const pages = {
 }
 
 Given(/^I am on the (\w+) page$/, async (page) => {
-    await pages[page].open()
+    await pages[page].open();
 });
 
 When(/^I login with (.+) and (.+)$/, async (email, password) => {
