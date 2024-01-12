@@ -1,4 +1,4 @@
-import { $ } from '@wdio/globals'
+import { $ } from '@wdio/globals';
 import Page from './page.js';
 
 class RegistrationPage extends Page {
@@ -8,27 +8,27 @@ class RegistrationPage extends Page {
     }
 
     get firstNameField() {
-        return $('name=Firstname');
+        return $('#FirstName');
     }
 
     get lastNameField() {
-        return $('name=Lastname');
+        return $('#LastName');
     }
 
     get emailField() {
-        return $('name=Email');
+        return $('#Email');
     }
 
     get passwordField() {
-        return $('name=Password');
+        return $('#Password');
     }
 
     get confirmPasswordField() {
-        return $('name=ConfirmPassword');
+        return $('#ConfirmPassword');
     }
 
     get submitRegistrationButton() {
-        return $('name=register-button');
+        return $('#register-button');
     }
 
     open () {
