@@ -8,15 +8,15 @@ class AccountPage extends Page {
     }
 
     get firstName() {
-        return $('#FirstName');
+        return $('#FirstName').getValue();
     }
 
     get lastName() {
-        return $('#LastName');
+        return $('#LastName').getValue();
     }
 
     get email() {
-        return $('#Email');
+        return $('#Email').getValue();
     }
 
     open () {
