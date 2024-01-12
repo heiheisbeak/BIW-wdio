@@ -24,6 +24,6 @@ export default class Page {
     * @param path path of the sub page (e.g. /path/to/page.html)
     */
     open (path) {
-        return browser.url(`https://demo.nopcommerce.com/${path}`)
+        return browser.url(`https://demo.nopcommerce.com${path}`)
     }
 }
