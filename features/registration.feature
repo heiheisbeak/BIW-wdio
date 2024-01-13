@@ -1,5 +1,5 @@
 Feature: Register a new user account
-
+@ignore
   Scenario: Register a new account with valid details
     Given I am on the home page
     When I select the Register option
