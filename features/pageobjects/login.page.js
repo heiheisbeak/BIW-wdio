@@ -1,4 +1,4 @@
-import { $ } from '@wdio/globals'
+import { $ } from '@wdio/globals';
 import Page from './page.js';
 
 class LoginPage extends Page {
@@ -15,6 +15,9 @@ class LoginPage extends Page {
         //return $('button[type="submit"]');
         //return $$('button[type="submit"]')[1];
         return $('button=Log in');
+        //return $('.login-button');
+
+        
     }
 
     async login (username, password) {

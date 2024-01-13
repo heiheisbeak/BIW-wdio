@@ -4,15 +4,6 @@ import { expect, $ } from '@wdio/globals'
 import LoginPage from '../pageobjects/login.page.js';
 import AccountPage from '../pageobjects/account.page.js';
 
-const pages = {
-    login: LoginPage,
-    account: AccountPage
-}
-
-Given(/^I am on the (\w+) page$/, async (page) => {
-    await pages[page].open();
-});
-
 When(/^I login with (.+) and (.+)$/, async (email, password) => {
     await LoginPage.linkLogIn.click();
     await LoginPage.login(email, password);
