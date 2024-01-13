@@ -24,3 +24,5 @@ Then(/^View my account$/, async () => {
     expect (await AccountPage.lastName).toHaveText(CustomerModel.LastName);
     expect (await AccountPage.email).toHaveText(CustomerModel.Email);
 });
+
+

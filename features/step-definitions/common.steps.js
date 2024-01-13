@@ -18,6 +18,12 @@ Given(/^I am on the (\w+) page$/, async (page) => {
 });
 
 Then(/^I am able to log in$/, async () => {
-	await (LoginPage.linkLogIn).click();
+	//await (LoginPage.linkLogIn).click();
     await (LoginPage.login(CustomerModel.Email, 'password123'));
+});
+
+Given(/^I am logged in as a registered user$/, async () => {
+    await RegistrationPage.open();
+	await RegistrationPage.register(CustomerModel.FirstName, CustomerModel.LastName, CustomerModel.Email, 'password123')
+    await LoginPage.login(CustomerModel.Email, 'password123');
 });
