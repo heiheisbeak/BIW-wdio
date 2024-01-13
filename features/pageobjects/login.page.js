@@ -12,15 +12,14 @@ class LoginPage extends Page {
     }
 
     get btnLogin () {
-        //return $('button[type="submit"]');
-        //return $$('button[type="submit"]')[1];
         return $('button=Log in');
-        //return $('.login-button');
-
-        
     }
 
     async login (username, password) {
+        if (await this.linkLogOut.isDisplayed()) {
+            await this.linkLogOut.click();
+        }
+        await this.linkLogIn.click();
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.btnLogin.click();
