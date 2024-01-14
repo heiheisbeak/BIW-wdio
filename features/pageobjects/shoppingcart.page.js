@@ -11,5 +11,13 @@ class ShoppingCartPage extends Page {
         return $('#checkout');
     }
 
+    get productDesc() {
+        return $('.product-name').getText();
+    }
+
+    get basketTotal() {
+        return $('.value-summary strong').getText();
+    }
+
 }
 export default new ShoppingCartPage();
