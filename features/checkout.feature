@@ -1,3 +1,4 @@
+
 Feature: Test that a user can add an item to their cart and complete the checkout process
 
   Background: 
@@ -12,3 +13,4 @@ Feature: Test that a user can add an item to their cart and complete the checkou
     Examples: 
       | item                                |
       | "Leica T Mirrorless Digital Camera" |
+      | "HTC One Mini Blue"                 |
