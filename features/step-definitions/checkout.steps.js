@@ -1,43 +1,41 @@
-import { Given, When, Then } from '@wdio/cucumber-framework';
+import { Given, When, Then, After } from '@wdio/cucumber-framework';
 import { expect, $ } from '@wdio/globals';
+import CustomerModel from '../models/customer.model.js';
 import HomePage from '../pageobjects/home.page.js';
 import SearchPage from '../pageobjects/search.page.js';
 import ShoppingCartPage from '../pageobjects/shoppingcart.page.js';
 import CheckOutPage from '../pageobjects/checkout.page.js';
-import checkoutPage from '../pageobjects/checkout.page.js';
+import OrderInformationPage from '../pageobjects/orderinformation.page.js';
 
-
-When(/^I add an "([^"]*)" to my cart$/, async (item) => {
-	await HomePage.search(item);
+When(/^I add an "([^"]*)" to my cart$/, async function(item) {
+    this.SharedData = item;
+	await HomePage.search(this.SharedData);
     await SearchPage.btnAddtoCart.click();
 });
 
-When(/^I complete the checkout process$/, async () => {
+When(/^I complete the checkout process$/, async function() {
+    const customer = new CustomerModel();
     await HomePage.linkShoppingCart.click();
+    expect (await ShoppingCartPage.productDesc).toEqual(this.SharedData);
+    this.BasketTotal = await ShoppingCartPage.basketTotal;
     await ShoppingCartPage.checkTerms.click();
     await ShoppingCartPage.btnCheckOut.click();
-    await CheckOutPage.dropCountry.selectByVisibleText('United Kingdom');
-    await CheckOutPage.txtfieldCity.setValue('City');
-    await CheckOutPage.txtfieldAddress1.setValue('AdddressLine1');
-    await CheckOutPage.txtfieldPostCode.setValue('NN1 1NN');
-    await CheckOutPage.txtfieldPhone.setValue('01908555666');
-    await CheckOutPage.btnAddressContinue.click();
-    await browser.pause(200);
-    await CheckOutPage.btnShippingContinue.click();
-    await browser.pause(200);
-    await CheckOutPage.btnPaymentContinue.click();
-    await browser.pause(200);
-    await CheckOutPage.btnPaymentInfoContinue.click();
-    await browser.pause(200);
-    await CheckOutPage.btnConfirm.click();
-    await browser.pause(10000);
-	return true;
+    await CheckOutPage.checkOut('United Kingdom', customer.City, customer.AddressLine1, customer.PostCode, customer.Phone);
 });
 
-Then(/^I can review my completed order$/, () => {
-    //navigate to my acount
-    //check order history
-	return true;
+Then(/^I can review my completed order$/, async function () {
+    await (CheckOutPage.lnkOrderDetails).waitForClickable();
+    await (CheckOutPage.lnkOrderDetails).click();
+    expect (await OrderInformationPage.lnkOrderProduct).toEqual(this.SharedData);
+    expect (await OrderInformationPage.orderConfirmTotal).toEqual(this.BasketTotal);
+});
+
+After(async function (scenario) {
+    if (scenario.result.status === 'failed') {
+        await browser.takeScreenshot();
+    }
+    await (OrderInformationPage.linkLogOut).click();
+    await (browser.deleteAllCookies());
 });
 
 
