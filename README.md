@@ -8,7 +8,7 @@ Basic user registration and checkout process testing framework using WebDriverIO
 
 - Node.js (version 12 or higher)
 - NPM (Node Package Manager)
-- Java (verion 8 or higher) for Allure Reporting
+- Java (version 8 or higher) for Allure Reporting
 - Chrome web browser
 
 ### Installation
