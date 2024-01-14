@@ -40,6 +40,5 @@ export default class Page {
 
     open (path) {
         return browser.url(`https://demo.nopcommerce.com${path}`);
-        //return browser.url(`${path}`);
     }
 }

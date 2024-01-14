@@ -18,6 +18,5 @@ class ShoppingCartPage extends Page {
     get basketTotal() {
         return $('.value-summary strong').getText();
     }
-
 }
 export default new ShoppingCartPage();

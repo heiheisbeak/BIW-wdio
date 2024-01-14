@@ -4,7 +4,6 @@ import Page from './page.js';
 class OrderInfomationPage extends Page {
 
     get lnkOrderProduct () {
-        //return $('.product').$('.a').getText();
         return $('em a').getText();
     }
 
