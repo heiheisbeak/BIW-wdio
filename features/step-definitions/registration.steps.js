@@ -1,4 +1,4 @@
-import { Given, When, Then } from '@wdio/cucumber-framework';
+import { Given, When, Then, After } from '@wdio/cucumber-framework';
 import { expect, $ } from '@wdio/globals';
 import LoginPage from '../pageobjects/login.page.js';
 import RegistrationPage from '../pageobjects/registration.page.js';
@@ -18,9 +18,19 @@ Then(/^I am able to use it to log in$/, async () => {
 
 Then(/^View my account$/, async () => {
     await (RegistrationPage.linkMyAccount.click());
-    expect (await AccountPage.firstName).toHaveText(customer.FirstName);
-    expect (await AccountPage.lastName).toHaveText(customer.LastName);
-    expect (await AccountPage.email).toHaveText(customer.Email);
+    expect (await AccountPage.firstName).toEqual(customer.FirstName);
+    //expect (await AccountPage.firstName).toEqual('foobar'); -- use to demo failure
+    expect (await AccountPage.lastName).toEqual(customer.LastName);
+    expect (await AccountPage.email).toEqual(customer.Email);
 });
+
+After(async function (scenario) {
+    if (scenario.result.status === 'failed') {
+        const screenshot = await browser.takeScreenshot();
+        this.attach(screenshot, 'image/png');
+    }
+});
+
+
 
 
