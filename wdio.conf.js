@@ -123,7 +123,7 @@ export const config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
+    reporters: ['spec',['allure', {outputDir: 'allure-results', disableWebdriverScreenshotsReporting: false}]],
 
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
@@ -328,14 +328,20 @@ export const config = {
     */
     // afterAssertion: function(params) {
     // }
-    afterTest: function (
+    afterStep: async function (step, scenario, { error, duration, passed }, context) {
+      if (error) {
+        await browser.takeScreenshot();
+      }
+    },
+    afterTest: async function (
         test,
         context,
         { error, result, duration, passed, retries }
       ) {
         // take a screenshot anytime a test fails and throws an error
         if (error) {
-          browser.takeScreenshot(); 
+          await browser.takeScreenshot(); 
         }
       }
+      
 }
