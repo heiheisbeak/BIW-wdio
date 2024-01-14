@@ -45,7 +45,37 @@ class CheckOutPage extends Page {
 
     get btnConfirm () {
         return $('button=Confirm');
-        //button-1 confirm-order-next-step-button
+    }
+
+    get lnkOrderDetails () {
+        return $('a=Click here for order details.');
+    }
+
+    get orderTotal() {
+        return $('.value-summary strong').getText();
+    }
+
+    async checkOut (country, city, addressline1, postcode, phone) {
+        await (this.dropCountry.selectByVisibleText(country));
+        await (this.txtfieldCity.setValue(city));
+        await (this.txtfieldAddress1.setValue(addressline1));
+        await (this.txtfieldPostCode.setValue(postcode));
+        await (this.txtfieldPhone.setValue(phone));
+
+        await (this.btnAddressContinue).waitForClickable();
+        await (this.btnAddressContinue).click();
+
+        await (this.btnShippingContinue).waitForClickable();
+        await (this.btnShippingContinue).click();
+
+        await (this.btnPaymentContinue).waitForClickable();
+        await (this.btnPaymentContinue).click();
+
+        await (this.btnPaymentInfoContinue).waitForClickable();
+        await (this.btnPaymentInfoContinue).click();
+
+        await (this.btnConfirm).waitForClickable();
+        await (this.btnConfirm).click();
     }
   
 
