@@ -1,4 +1,4 @@
-//const { faker } = require('@faker-js/faker');
+
 import { faker } from '@faker-js/faker';
 
 
@@ -32,4 +32,4 @@ class CustomerModel {
         this.Phone = Phone;
     }
 }
-export default new CustomerModel();
+export default CustomerModel;
