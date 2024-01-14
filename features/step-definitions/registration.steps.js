@@ -5,24 +5,22 @@ import RegistrationPage from '../pageobjects/registration.page.js';
 import AccountPage from '../pageobjects/account.page.js';
 import CustomerModel from '../models/customer.model.js';
 
-When(/^I select the Register option$/, async () => {
+const customer = new CustomerModel();
+
+When(/^I register a new account$/, async () => {
     await (RegistrationPage.linkRegister).click();
+    await RegistrationPage.register(customer.FirstName, customer.LastName, customer.Email, 'password123')
 });
 
-When(/^I enter my registration details$/, async () => {
-    await (await (RegistrationPage.firstNameField)).setValue(CustomerModel.FirstName);
-    await (RegistrationPage.lastNameField).setValue(CustomerModel.LastName);
-    await (RegistrationPage.emailField).setValue(CustomerModel.Email);
-    await (RegistrationPage.passwordField).setValue("password123");
-    await (RegistrationPage.confirmPasswordField).setValue("password123");
-    await (RegistrationPage.submitRegistrationButton).click();
+Then(/^I am able to use it to log in$/, async () => {
+    await (LoginPage.login(customer.Email, 'password123'));
 });
 
 Then(/^View my account$/, async () => {
     await (RegistrationPage.linkMyAccount.click());
-    expect (await AccountPage.firstName).toHaveText(CustomerModel.FirstName);
-    expect (await AccountPage.lastName).toHaveText(CustomerModel.LastName);
-    expect (await AccountPage.email).toHaveText(CustomerModel.Email);
+    expect (await AccountPage.firstName).toHaveText(customer.FirstName);
+    expect (await AccountPage.lastName).toHaveText(customer.LastName);
+    expect (await AccountPage.email).toHaveText(customer.Email);
 });
 
 
