@@ -10,6 +10,6 @@ After(async function (scenario) {
         const screenshot = await browser.takeScreenshot();
         this.attach(screenshot, 'image/png');
     }
-
-    
 });
+
+
