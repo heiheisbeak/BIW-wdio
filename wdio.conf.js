@@ -129,7 +129,7 @@ export const config = {
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
         //require: ['./features/step-definitions/*.js', './features/hooks.js'],
-        require: ['./features/step-definitions/*.js'],
+        require: ['./features/support/SetWorldConstructor.js','./features/step-definitions/*.js'],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -328,4 +328,14 @@ export const config = {
     */
     // afterAssertion: function(params) {
     // }
+    afterTest: function (
+        test,
+        context,
+        { error, result, duration, passed, retries }
+      ) {
+        // take a screenshot anytime a test fails and throws an error
+        if (error) {
+          browser.takeScreenshot(); 
+        }
+      }
 }
