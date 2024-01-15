@@ -8,15 +8,15 @@ import CheckOutPage from '../pageobjects/checkout.page.js';
 import OrderInformationPage from '../pageobjects/orderinformation.page.js';
 
 When(/^I add an "([^"]*)" to my cart$/, async function(item) {
-    this.SharedData = item;
-	await HomePage.search(this.SharedData);
+    this.ItemName = item;
+	await HomePage.search(this.ItemName);
     await SearchPage.btnAddtoCart.click();
 });
 
 When(/^I complete the checkout process$/, async function() {
     const customer = new CustomerModel();
     await HomePage.linkShoppingCart.click();
-    expect (await ShoppingCartPage.productDesc).toEqual(this.SharedData);
+    expect (await ShoppingCartPage.productDesc).toEqual(this.ItemName);
     this.BasketTotal = await ShoppingCartPage.basketTotal;
     await ShoppingCartPage.checkTerms.click();
     await ShoppingCartPage.btnCheckOut.click();
@@ -26,7 +26,7 @@ When(/^I complete the checkout process$/, async function() {
 Then(/^I can review my completed order$/, async function () {
     await (CheckOutPage.lnkOrderDetails).waitForClickable();
     await (CheckOutPage.lnkOrderDetails).click();
-    expect (await OrderInformationPage.lnkOrderProduct).toEqual(this.SharedData);
+    expect (await OrderInformationPage.lnkOrderProduct).toEqual(this.ItemName);
     expect (await OrderInformationPage.orderConfirmTotal).toEqual(this.BasketTotal);
 });
 

@@ -43,7 +43,7 @@ npx allure generate --clean allure-results && npx allure open
 - `/allure-report`: Generated Allure report files.
 - `/features`: Test specifications and Cucumber feature files.
 - `.--/pageobjects`: Page object models for web page abstraction.
-- `.--/models`: Contains a constructor for generating customer data on demand.
+- `.--/models`: Contains a constructor for generating customer data on demand using Faker.js.
 - `.--/support`: Contains custom world configuration to enable passing values between Steps.
 - `wdio.conf.js`: WebDriverIO configuration file.
 
